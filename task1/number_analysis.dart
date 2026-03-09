@@ -1,8 +1,6 @@
 // Task 1: Number Analysis App
-// Name: Addis Ababa University Student (Placeholder)
+// Name: Eyoel Goshu
 
-/// Returns the largest number in the list using a manual loop.
-/// Handle empty list by returning 0 (as per challenge requirement).
 int findMax(List<int> numbers) {
   if (numbers.isEmpty) {
     print('Error: List is empty. Returning 0.');
@@ -17,7 +15,6 @@ int findMax(List<int> numbers) {
   return maxVal;
 }
 
-/// Returns the smallest number in the list using a manual loop.
 int findMin(List<int> numbers) {
   if (numbers.isEmpty) {
     print('Error: List is empty. Returning 0.');
@@ -32,7 +29,6 @@ int findMin(List<int> numbers) {
   return minVal;
 }
 
-/// Returns the sum of all numbers using a loop and accumulator pattern.
 int calculateSum(List<int> numbers) {
   int sum = 0;
   for (int num in numbers) {
@@ -41,14 +37,10 @@ int calculateSum(List<int> numbers) {
   return sum;
 }
 
-/// Returns the average as a decimal.
-/// Calls calculateSum() internally to avoid duplication.
 double calculateAverage(List<int> numbers) {
   if (numbers.isEmpty) return 0.0;
   return calculateSum(numbers) / numbers.length;
 }
-
-/// Bonus Challenge: Returns how many numbers in the list are negative.
 int countNegatives(List<int> numbers) {
   int count = 0;
   for (int num in numbers) {
@@ -58,8 +50,6 @@ int countNegatives(List<int> numbers) {
   }
   return count;
 }
-
-/// Bonus Challenge: Returns a new sorted list (ascending order) using Bubble Sort.
 List<int> bubbleSort(List<int> numbers) {
   List<int> sorted = List.from(numbers);
   int n = sorted.length;
@@ -96,22 +86,44 @@ void main() {
   print('Negative Count: $negativeCount');
   print('Sorted List   : $sortedNumbers');
 }
+/*Q1. What is the difference between a List<int> and a List<dynamic> in Dart? Why is it usually better to use a typed list like List<int>?
 
-/*
-CONCEPTUAL QUESTIONS
-
-Q1. What is the difference between a List<int> and a List<dynamic> in Dart? Why is it usually better to use a typed list like List<int>?
-Answer: List<int> is a type-safe collection that only accepts integer values, whereas List<dynamic> can hold any type of object (strings, doubles, etc.) simultaneously. Using a typed list is better because it provides compile-time safety, catch errors earlier, enables better IDE autocompletion, and allows for performance optimizations.
+Answer:
+A List<int> can only store integer values, while a List<dynamic> can store values of any type such as integers, strings, booleans, or objects. Using a typed list like List<int> is usually better because it helps prevent errors and makes the code safer. The compiler can check the types of values being added to the list, which reduces bugs and makes the code easier to understand and maintain.
 
 Q2. In your findMax() function, why is it important to initialize your 'running maximum' variable to the first element of the list rather than to 0 or to a very small number? What could go wrong with the other approaches?
-Answer: Initializing to the first element ensures that the candidate maximum is actually a value from the set being analyzed. If initialized to 0, and all numbers in the list were negative (e.g., [-5, -10, -20]), the function would incorrectly return 0 as the maximum. If initialized to a "very small number," you risk the list containing even smaller numbers, leading to errors.
+
+Answer:
+It is important to initialize the running maximum to the first element of the list because it guarantees that the starting value actually exists in the list. If we set it to 0, the function could give the wrong result when all numbers in the list are negative, since 0 would incorrectly remain the maximum. Using a very small number can also be unreliable because we might not know how small the numbers in the list could be. Starting with the first element avoids these problems and ensures the comparison works correctly.
 
 Q3. Your calculateAverage() function calls calculateSum() internally. What software design principle does this demonstrate, and why is reusing existing functions preferable to duplicating code?
-Answer: This demonstrates the DRY (Don't Repeat Yourself) principle. Reusing existing functions is preferable because it reduces code duplication, makes maintenance easier (as you only have to fix logic in one place), and ensures consistency across different parts of the application.
+
+Answer:
+This demonstrates the principle of code reuse and modular programming. Instead of rewriting the same logic multiple times, the program uses an already existing function to perform the task. Reusing functions is better because it keeps the code cleaner, reduces repetition, and makes maintenance easier. If the logic needs to change later, we only have to update it in one place instead of several different parts of the code.
 
 Q4. Describe in plain English what the for-in loop syntax does in Dart. How is it different from a traditional for loop with an index? When would you prefer one over the other?
-Answer: A for-in loop automatically iterates through every element in a collection without needing to track an index. It is simpler and more readable than a traditional for-loop when you just need to access each item. A traditional for-loop is preferred when you need the index for logic (like comparing with the next element or modifying a specific position), or when you only need to iterate over a specific range.
+
+Answer:
+A for-in loop in Dart goes through each item in a collection one by one and lets you directly work with each element. Instead of using a number to access elements, it automatically gives you the value of each item in the list.
+
+A traditional for loop uses an index (like i) to access elements by their position in the list. The for-in loop is usually preferred when you only need to read the values in a collection because it is simpler and easier to read. A traditional for loop is better when you need to know the position of elements or modify them using their index.
 
 Q5. If someone calls your findMax() function with an empty list, what happens? How could you modify the function to handle that case safely?
-Answer: If called with an empty list without safeguards, accessing numbers[0] would throw a RangeError. To handle this safely, one should check if the list is empty at the start of the function and either throw a custom exception, return a null (if the return type is int?), or return a default value like 0 with an error message.
+
+Answer:
+If the findMax() function is called with an empty list, the program may crash or throw an error because there is no first element to compare. To handle this safely, the function can first check if the list is empty. If it is empty, the function could print an error message or return a default value such as null or 0. This prevents the program from crashing and makes the function more reliable.
+
+1.7 Optional Challenge Extensions
+
+Empty List Guard:
+Add a condition at the beginning of each function that checks if the list is empty. If it is empty, print a message like "The list is empty. Cannot perform the calculation." and return a safe default value such as 0 or null.
+
+Count Negatives:
+Create a function called countNegatives(List<int> numbers) that loops through the list and counts how many numbers are less than zero. The function should return that count and print it in the program output.
+
+Sorted Output:
+Write a function that returns a new list sorted in ascending order without using .sort(). You could implement a simple algorithm like bubble sort, where the program repeatedly compares neighboring elements and swaps them if they are in the wrong order until the list is sorted.
+
+Collection Methods Comparison:
+Rewrite the functions using Dart’s built-in collection methods like .fold(), .where(), or .reduce(). Keep both versions of the code and add comments explaining that built-in methods are usually shorter and more concise, while manual loops can sometimes be easier for beginners to understand.
 */

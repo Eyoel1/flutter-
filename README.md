@@ -1,7 +1,7 @@
 # Dart Fundamentals Assignment
 
-**Name:** Addis Ababa University Student (Placeholder)  
-**Student ID:** AAU-2026-XXXX  
+**Name:** Eyoel Goshu
+**Student ID:** ATE/2096/15  
 **Subject:** Software Engineering • Addis Ababa University
 
 ## Project Overview
