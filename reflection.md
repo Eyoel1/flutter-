@@ -1,21 +1,24 @@
 Q1. What is the difference between a List<int> and a List<dynamic> in Dart? Why is it usually better to use a typed list like List<int>?
 
 Answer:
-A List<int> can only store integer values, while a List<dynamic> can store values of any type such as integers, strings, booleans, or objects. Using a typed list like List<int> is usually better because it helps prevent errors and makes the code safer. The compiler can check the types of values being added to the list, whichQ1. What is the difference between a List<int> and a List<dynamic> in Dart? Why is it usually better to use a typed list like List<int>?
-
-Answer:
 A List<int> can only store integer values, while a List<dynamic> can store values of any type such as integers, strings, booleans, or objects. Using a typed list like List<int> is usually better because it helps prevent errors and makes the code safer. The compiler can check the types of values being added to the list, which reduces bugs and makes the code easier to understand and maintain.
 
 Q2. In your findMax() function, why is it important to initialize your 'running maximum' variable to the first element of the list rather than to 0 or to a very small number? What could go wrong with the other approaches?
 
 Answer:
-{{ ... }}
-Input Validation:
-Check if the operation passed to computeAsync() is valid. If it is not recognized, throw a custom exception class that you create (for example InvalidOperationException).
+It is important to initialize the running maximum to the first element of the list because it guarantees that the starting value actually exists in the list. If we set it to 0, the function could give the wrong result when all numbers in the list are negative, since 0 would incorrectly remain the maximum. Using a very small number can also be unreliable because we might not know how small the numbers in the list could be. Starting with the first element avoids these problems and ensures the comparison works correctly.
 
-Parallel Futures:
-Use Future.wait() to run several calculations at the same time instead of waiting for each one separately. This makes the program faster because multiple tasks run in parallel. Add a short comment explaining this in the code.
-because it is simpler and easier to read. A traditional for loop is better when you need to know the position of elements or modify them using their index.
+Q3. Your calculateAverage() function calls calculateSum() internally. What software design principle does this demonstrate, and why is reusing existing functions preferable to duplicating code?
+
+Answer:
+This demonstrates the principle of code reuse and modular programming. Instead of rewriting the same logic multiple times, the program uses an already existing function to perform the task. Reusing functions is better because it keeps the code cleaner, reduces repetition, and makes maintenance easier. If the logic needs to change later, we only have to update it in one place instead of several different parts of the code.
+
+Q4. Describe in plain English what the for-in loop syntax does in Dart. How is it different from a traditional for loop with an index? When would you prefer one over the other?
+
+Answer:
+A for-in loop in Dart goes through each item in a collection one by one and lets you directly work with each element. Instead of using a number to access elements, it automatically gives you the value of each item in the list.
+
+A traditional for loop uses an index (like i) to access elements by their position in the list. The for-in loop is usually preferred when you only need to read the values in a collection because it is simpler and easier to read. A traditional for loop is better when you need to know the position of elements or modify them using their index.
 
 Q5. If someone calls your findMax() function with an empty list, what happens? How could you modify the function to handle that case safely?
 
